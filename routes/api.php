@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'store']);
+
+Route::post('/wallets/create', [WalletController::class, 'create']);
+Route::get('/wallets/{walletId}/details', [WalletController::class, 'getDetails']);
+Route::get('/wallets', [WalletController::class, 'getAllWallets']);
+Route::post('/wallets/send-money', [WalletController::class, 'sendMoney']);
